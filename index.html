@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Giparstore | Jual Beli Nomor OTP & Virtual</title>
+    <!-- Font Awesome 6 (gratis) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #0a0c10;
+            color: #eef2ff;
+            scroll-behavior: smooth;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2a3e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+
+        /* header / navbar */
+        .navbar {
+            background: #030507cc;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #f9731622;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f97316, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            display: block;
+        }
+        .saldo-card {
+            background: #0f172a;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            border-left: 3px solid #f97316;
+            box-shadow: 0 0 10px rgba(249,115,22,0.2);
+        }
+        .saldo-card i {
+            color: #fbbf24;
+            margin-right: 8px;
+        }
+        .saldo-card span {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #f97316;
+        }
+        .btn-deposit {
+            background: #f97316;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            color: #0a0c10;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-left: 1rem;
+        }
+        .btn-deposit:hover {
+            background: #ff8c42;
+            transform: scale(1.02);
+            box-shadow: 0 0 8px #f97316;
+        }
+
+        /* container */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* filter & info */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: #11161f;
+            padding: 1rem 1.5rem;
+            border-radius: 2rem;
+            border: 1px solid #2d3a4e;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: #1e293b;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            color: #cbd5e1;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .filter-btn.active {
+            background: #f97316;
+            color: #090909;
+            box-shadow: 0 0 6px #f97316;
+        }
+        .filter-btn:hover {
+            background: #3b82f6;
+            color: white;
+        }
+        .info-stats {
+            background: #0f172a;
+            padding: 0.4rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* grid nomor */
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+        }
+        .card-nomor {
+            background: #0f172a;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            transition: 0.25s ease;
+            border: 1px solid #2d3a4e;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+        }
+        .card-nomor:hover {
+            transform: translateY(-5px);
+            border-color: #f97316;
+            box-shadow: 0 15px 25px -10px rgba(249,115,22,0.2);
+        }
+        .badge-jenis {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.7rem;
+        }
+        .wa { background: #075e54; color: white; }
+        .tele { background: #26a7de; color: white; }
+        .lain { background: #3b82f6; color: white; }
+        .nomor-display {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: #010409;
+            padding: 0.4rem 0.8rem;
+            border-radius: 1rem;
+            margin: 0.6rem 0;
+            font-family: monospace;
+            border-left: 4px solid #f97316;
+        }
+        .harga {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #f97316;
+            margin: 0.5rem 0;
+        }
+        .harga small {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+        .btn-beli {
+            background: #1e293b;
+            width: 100%;
+            padding: 0.7rem;
+            border-radius: 1.2rem;
+            font-weight: 700;
+            border: none;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn-beli:hover {
+            background: #f97316;
+            color: #000;
+            box-shadow: 0 0 10px #f97316;
+        }
+
+        /* chat AI */
+        .chatbot-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 200;
+        }
+        .chat-toggle {
+            background: #f97316;
+            width: 60px;
+            height: 60px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(249,115,22,0.5);
+            transition: 0.2s;
+            border: none;
+            color: #0f172a;
+        }
+        .chat-window {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            width: 320px;
+            background: #0f172a;
+            border-radius: 1.5rem;
+            border: 1px solid #f97316;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            backdrop-filter: blur(4px);
+        }
+        .chat-header {
+            background: #03070f;
+            padding: 0.8rem;
+            font-weight: bold;
+            border-bottom: 1px solid #f97316;
+            color: #f97316;
+        }
+        .chat-messages {
+            height: 280px;
+            overflow-y: auto;
+            padding: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .chat-input-area {
+            display: flex;
+            border-top: 1px solid #2d3a4e;
+            padding: 0.5rem;
+            gap: 0.5rem;
+            background: #0a0f18;
+        }
+        .chat-input-area input {
+            flex: 1;
+            background: #1e293b;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 2rem;
+            color: white;
+            outline: none;
+        }
+        .chat-input-area button {
+            background: #f97316;
+            border: none;
+            border-radius: 2rem;
+            padding: 0 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .msg-bot, .msg-user {
+            max-width: 85%;
+            padding: 8px 12px;
+            border-radius: 1.2rem;
+            font-size: 0.8rem;
+        }
+        .msg-bot {
+            background: #1e2a3a;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .msg-user {
+            background: #f97316;
+            color: #0a0c10;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* modal deposit */
+        .modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 300;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+        }
+        .modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background: #0f172a;
+            max-width: 400px;
+            width: 90%;
+            border-radius: 2rem;
+            padding: 2rem;
+            border-top: 5px solid #f97316;
+            text-align: center;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            margin: 1rem 0;
+            background: #1e293b;
+            border: 1px solid #f97316;
+            border-radius: 1rem;
+            color: white;
+            font-size: 1rem;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .modal-buttons button {
+            padding: 8px 20px;
+            border-radius: 2rem;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .confirm-btn {
+            background: #f97316;
+        }
+        .cancel-btn {
+            background: #334155;
+            color: white;
+        }
+
+        /* footer */
+        .footer {
+            background: #03070f;
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 1px solid #f9731622;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+        }
+        .admin-wa {
+            color: #f97316;
+            font-weight: bold;
+            background: #0f172a;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+        }
+        @media (max-width: 600px) {
+            .navbar { flex-direction: column; align-items: stretch; }
+            .btn-deposit { margin-left: 0; margin-top: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">
+        <h1>GIPARSTORE</h1>
+        <span><i class="fas fa-sim-card"></i> Jual beli nokos aman & cepat</span>
+    </div>
+    <div class="saldo-card">
+        <i class="fas fa-coins"></i> Saldo: <span id="saldoUser">0</span> <small>IDR</small>
+        <button class="btn-deposit" id="tombolDeposit"><i class="fas fa-plus-circle"></i> Deposit</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="filter-bar">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="whatsapp">WhatsApp</button>
+            <button class="filter-btn" data-filter="telegram">Telegram</button>
+            <button class="filter-btn" data-filter="otp">OTP Lainnya</button>
+        </div>
+        <div class="info-stats">
+            <i class="fas fa-database"></i> Tersedia: <span id="totalNomor">0</span> nomor
+        </div>
+    </div>
+
+    <div class="numbers-grid" id="numbersGrid">
+        <!-- daftar nomor akan di inject js -->
+    </div>
+</div>
+
+<div class="footer">
+    <p><i class="fab fa-whatsapp"></i> Admin official: <strong class="admin-wa">0895326378456</strong> (chat untuk keluhan / verifikasi)</p>
+    <p style="margin-top: 8px;">🔒 Deposit otomatis via sistem | minimal deposit Rp1.000 | Harga nokos mulai Rp5.500</p>
+    <p>© 2025 Giparstore — aman, cepat, terpercaya</p>
+</div>
+
+<!-- Floating AI chat -->
+<div class="chatbot-float">
+    <div class="chat-toggle" id="chatToggle">
+        <i class="fas fa-robot"></i>
+    </div>
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <i class="fas fa-brain"></i> AI Assistant Giparstore
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg-bot">Halo! 👋 Saya AI Giparstore. Mau tanya seputar deposit, cara beli nomor, atau lainnya? Minimal deposit 1.000 rupiah, harga nokos mulai 5.500. Yuk deposit dulu ya!</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Tanyakan sesuatu...">
+            <button id="chatSend"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Deposit -->
+<div id="depositModal" class="modal">
+    <div class="modal-content">
+        <i class="fas fa-wallet" style="font-size: 2rem; color: #f97316;"></i>
+        <h3>Isi Deposit</h3>
+        <p>Minimal deposit <strong>Rp1.000</strong> (otomatis masuk saldo)</p>
+        <input type="number" id="depositAmount" placeholder="Nominal deposit (Rupiah)" min="1000" step="1000">
+        <div class="modal-buttons">
+            <button class="cancel-btn" id="closeModalBtn">Batal</button>
+            <button class="confirm-btn" id="confirmDepositBtn">Deposit Sekarang</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ---------- DATA NOMOR (nokos) ----------
+    let dataNumbers = [
+        { id: 1, jenis: "whatsapp", jenisTampil: "WhatsApp", nomor: "+6281234567891", harga: 5500, badge: "wa" },
+        { id: 2, jenis: "whatsapp", jenisTampil: "WhatsApp", nomor: "+6281234567892", harga: 6500, badge: "wa" },
+        { id: 3, jenis: "whatsapp", jenisTampil: "WhatsApp", nomor: "+6282134567893", harga: 7500, badge: "wa" },
+        { id: 4, jenis: "telegram", jenisTampil: "Telegram", nomor: "+628311234567", harga: 6000, badge: "tele" },
+        { id: 5, jenis: "telegram", jenisTampil: "Telegram", nomor: "+628522345678", harga: 7000, badge: "tele" },
+        { id: 6, jenis: "telegram", jenisTampil: "Telegram", nomor: "+628571234567", harga: 5500, badge: "tele" },
+        { id: 7, jenis: "otp", jenisTampil: "OTP SMS", nomor: "+6281323456780", harga: 5900, badge: "lain" },
+        { id: 8, jenis: "otp", jenisTampil: "OTP SMS", nomor: "+628967890123", harga: 6800, badge: "lain" },
+        { id: 9, jenis: "otp", jenisTampil: "OTP All", nomor: "+628213457890", harga: 8000, badge: "lain" },
+        { id: 10, jenis: "whatsapp", jenisTampil: "WhatsApp", nomor: "+6289536378456", harga: 9900, badge: "wa" }
+    ];
+
+    let saldo = 0;
+    let activeFilter = "all";
+
+    // Load data dari localStorage jika ada
+    function loadFromStorage() {
+        const storedSaldo = localStorage.getItem("giparstore_saldo");
+        if (storedSaldo !== null) saldo = parseInt(storedSaldo);
+        const storedNumbers = localStorage.getItem("giparstore_numbers");
+        if (storedNumbers !== null) {
+            dataNumbers = JSON.parse(storedNumbers);
+        } else {
+            // inisialisasi ID unik
+            dataNumbers.forEach((item, idx) => { item.id = idx+1; });
+            saveNumbersToStorage();
+        }
+    }
+
+    function saveSaldo() {
+        localStorage.setItem("giparstore_saldo", saldo);
+        document.getElementById("saldoUser").innerText = saldo;
+    }
+
+    function saveNumbersToStorage() {
+        localStorage.setItem("giparstore_numbers", JSON.stringify(dataNumbers));
+    }
+
+    // render daftar nomor berdasarkan filter
+    function renderNumbers() {
+        let filtered = dataNumbers.filter(num => {
+            if (activeFilter === "all") return true;
+            if (activeFilter === "whatsapp") return num.jenis === "whatsapp";
+            if (activeFilter === "telegram") return num.jenis === "telegram";
+            if (activeFilter === "otp") return num.jenis === "otp";
+            return true;
+        });
+        document.getElementById("totalNomor").innerText = filtered.length;
+        const grid = document.getElementById("numbersGrid");
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">🔥 Nomor kosong, silahkan cek lagi nanti atau deposit untuk beli stok baru!</div>`;
+            return;
+        }
+        grid.innerHTML = filtered.map(num => `
+            <div class="card-nomor" data-id="${num.id}">
+                <div><span class="badge-jenis ${num.badge}">${num.jenisTampil}</span></div>
+                <div class="nomor-display"><i class="fas fa-phone-alt"></i> ${num.nomor}</div>
+                <div class="harga">Rp${num.harga.toLocaleString()} <small>/ akun</small></div>
+                <button class="btn-beli" data-id="${num.id}" data-harga="${num.harga}"><i class="fas fa-shopping-cart"></i> Beli Sekarang</button>
+            </div>
+        `).join("");
+
+        // attach event beli
+        document.querySelectorAll(".btn-beli").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.getAttribute("data-id"));
+                const harga = parseInt(btn.getAttribute("data-harga"));
+                beliNomor(id, harga);
+            });
+        });
+    }
+
+    // beli nomor
+    function beliNomor(id, harga) {
+        if (saldo < harga) {
+            alert("❌ Saldo tidak mencukupi! Silakan deposit terlebih dahulu. Minimal deposit Rp1.000");
+            return;
+        }
+        const index = dataNumbers.findIndex(n => n.id === id);
+        if (index === -1) {
+            alert("Nomor sudah tidak tersedia.");
+            renderNumbers();
+            return;
+        }
+        // konfirmasi
+        const confirmBeli = confirm(`Beli nomor ${dataNumbers[index].nomor} seharga Rp${harga.toLocaleString()} ? Saldo akan dipotong.`);
+        if (!confirmBeli) return;
+        saldo -= harga;
+        saveSaldo();
+        // hapus nomor dari database
+        dataNumbers.splice(index, 1);
+        saveNumbersToStorage();
+        renderNumbers();
+        alert(`✅ Berhasil membeli nomor! Sisa saldo: Rp${saldo.toLocaleString()}. Gunakan nomor untuk verifikasi OTP. Hubungi admin jika ada kendala.`);
+        // update tampilan saldo
+        document.getElementById("saldoUser").innerText = saldo;
+    }
+
+    // DEPOSIT OTOMATIS
+    function showDepositModal() {
+        const modal = document.getElementById("depositModal");
+        modal.classList.add("active");
+    }
+
+    function closeModal() {
+        document.getElementById("depositModal").classList.remove("active");
+    }
+
+    function prosesDeposit() {
+        const amountInput = document.getElementById("depositAmount");
+        let amount = parseInt(amountInput.value);
+        if (isNaN(amount) || amount < 1000) {
+            alert("Minimal deposit Rp1.000 !");
+            return;
+        }
+        // deposit otomatis bertambah
+        saldo += amount;
+        saveSaldo();
+        document.getElementById("saldoUser").innerText = saldo;
+        alert(`💰 Deposit sukses! +Rp${amount.toLocaleString()}. Saldo sekarang Rp${saldo.toLocaleString()}. Selamat belanja nomor!`);
+        amountInput.value = "";
+        closeModal();
+    }
+
+    // ---------- AI CHATBOT RESPONSES ----------
+    function getBotReply(userMsg) {
+        const msg = userMsg.toLowerCase();
+        if (msg.includes("halo") || msg.includes("hi") || msg.includes("hai")) {
+            return "Halo kak! Selamat datang di Giparstore. Ada yang bisa dibantu? 😊";
+        }
+        if (msg.includes("deposit") || msg.includes("top up") || msg.includes("isi saldo")) {
+            return "💸 Cara deposit: klik tombol 'Deposit' di pojok kanan atas, masukkan nominal (min Rp1.000), dan saldo akan otomatis masuk. Praktis dan cepat!";
+        }
+        if (msg.includes("minimal deposit") || msg.includes("min deposit")) {
+            return "Minimal deposit hanya Rp1.000 saja. Sangat murah untuk mulai beli nomor OTP, WhatsApp, Telegram!";
+        }
+        if (msg.includes("cara beli") || msg.includes("beli nomor") || msg.includes("membeli")) {
+            return "🛒 Cara beli: pastikan saldo cukup, lalu tekan tombol 'Beli Sekarang' pada nomor yang diinginkan. Nomor akan langsung terhapus dari stok dan kamu bisa gunakan untuk verifikasi.";
+        }
+        if (msg.includes("harga") || msg.includes("berapa harga")) {
+            return "Harga nokos mulai dari Rp5.500. Tergantung jenis dan kualitas nomor. Cek langsung di daftar nomor!";
+        }
+        if (msg.includes("admin") || msg.includes("kontak")) {
+            return "📞 Admin kami: 0895326378456 (WhatsApp). Hubungi untuk keluhan atau jika nomor bermasalah. Fast response.";
+        }
+        if (msg.includes("whatsapp") || msg.includes("telegram")) {
+            return "Kami menyediakan nomor WhatsApp, Telegram, dan OTP sms. Filter bisa dipilih di atas ya!";
+        }
+        if (msg.includes("terima kasih") || msg.includes("makasih")) {
+            return "Sama-sama! Jangan lupa deposit dan dapatkan nomor terbaik. Happy transaksi! 🔥";
+        }
+        return "🤖 AI: Untuk deposit klik tombol Deposit (min 1000). Setelah saldo cukup, beli nomor di daftar. Butuh bantuan lain? ketik 'admin' atau 'cara beli'.";
+    }
+
+    // init AI
+    function sendChatMessage() {
+        const input = document.getElementById("chatInput");
+        const msg = input.value.trim();
+        if (msg === "") return;
+        const chatMessages = document.getElementById("chatMessages");
+        // user message
+        const userDiv = document.createElement("div");
+        userDiv.className = "msg-user";
+        userDiv.innerText = msg;
+        chatMessages.appendChild(userDiv);
+        input.value = "";
+        // bot reply with delay
+        setTimeout(() => {
+            const reply = getBotReply(msg);
+            const botDiv = document.createElement("div");
+            botDiv.className = "msg-bot";
+            botDiv.innerText = reply;
+            chatMessages.appendChild(botDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 400);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // ---------- Initial & event binding ----------
+    window.addEventListener("DOMContentLoaded", () => {
+        loadFromStorage();
+        renderNumbers();
+        document.getElementById("saldoUser").innerText = saldo;
+
+        // filter buttons
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        filterBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                filterBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                activeFilter = btn.getAttribute("data-filter");
+                renderNumbers();
+            });
+        });
+
+        // deposit
+        document.getElementById("tombolDeposit").addEventListener("click", showDepositModal);
+        document.getElementById("closeModalBtn").addEventListener("click", closeModal);
+        document.getElementById("confirmDepositBtn").addEventListener("click", prosesDeposit);
+        document.getElementById("depositModal").addEventListener("click", (e) => {
+            if (e.target === document.getElementById("depositModal")) closeModal();
+        });
+
+        // chat toggles
+        const chatToggle = document.getElementById("chatToggle");
+        const chatWindow = document.getElementById("chatWindow");
+        chatToggle.addEventListener("click", () => {
+            if (chatWindow.style.display === "flex") chatWindow.style.display = "none";
+            else chatWindow.style.display = "flex";
+        });
+        document.getElementById("chatSend").addEventListener("click", sendChatMessage);
+        document.getElementById("chatInput").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendChatMessage();
+        });
+
+        // jika klik di luar chat window mungkin biarkan tetap
+    });
+</script>
+</body>
+</html>
